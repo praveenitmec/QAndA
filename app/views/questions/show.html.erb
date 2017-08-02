@@ -1,0 +1,70 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @question.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @question.description %>
+</p>
+
+<%if current_user%>
+  <%= link_to 'Edit', edit_question_path(@question),class:'btn btn-default btn-primary' %> |
+<%end%>
+<%= link_to 'Back', questions_path,class:'btn btn-default btn-primary' %>
+
+
+<div class="well">
+  <%if @question.answers.any?{|answer| answer.user_id == current_user.id} || @question.user_id == current_user.id %>
+    <div class = 'answers'>
+      <% @question.answers.each do |answer| %>
+        <div class="media">
+         <div class="media-body">
+            <h4 class="media-heading"><%= answer.user.email %>:
+            </h4>
+           <%= answer.body %>
+           <% if answer.user.id == current_user.id %>
+             <input type="button" class= "btn btn-default btn-primary"  value = "delete" id = "js-delete-answer" data-answer-id = <%=answer.id%>>
+           <%end%>
+         </div>
+        </div>
+      <% end %>
+    </div>
+  <%else%>
+      <h4>Leave a answer:</h4>
+      <%= form_for([@question, @question.answers.build]) do |f| %>
+          <p>
+            <%= f.label :body %><br>
+            <%= f.text_area :body %>
+          </p>
+          <p>
+            <%= f.submit %>
+          </p>
+      <% end %>
+      <p>
+  <%end%>
+</div>
+
+<script>
+ $(document).ready(function(){
+ 	$('body').on('click', '#js-delete-answer' ,function(event){
+ 		var $answer_div = $(this).parent().parent();
+ 		$.ajax({
+           type: "DELETE",
+           url: "/delete_answer",
+           dataType: "json",
+           success: function (response) {
+               if (response.status === "OK") {
+                   window.location.reload();
+               } else {
+                   alert("not able to delete");
+               }
+           },
+
+           data: {'id': $(this).data('answer-id')}
+       });
+ 	});
+});
+</script>
