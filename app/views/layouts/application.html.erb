@@ -20,18 +20,18 @@
           <a class="navbar-brand" href="/">QAndA</a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1"">
-          <ul class="nav navbar-nav">
-            <% if current_user %>
+          <% if current_user %>
+            <ul class="nav navbar-nav">
               <li><a href="/questions">Questions</a></li>
-            <%end%>
+              <li><a href="/questions/new">New Question</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <% if current_user %>
-                <li>
-                    <%=link_to "Logout",logout_path, class: "btn btn-default btn-outline btn-circle collapsed"%>
-                </li>
-              <%end%>
-          </ul>
+              <li>
+                <%=link_to "Logout",logout_path, class: "btn btn-default btn-outline btn-circle collapsed"%>
+              </li>
+            </ul>
+            <div class='user-name'>Hi <%=current_user.name %></div>
+          <%end%>
         </div>
       </div>
     </nav>
@@ -55,9 +55,6 @@
       <div class="row">
       </div>
       <div class="row">
-           <%if current_user %>
-             <h1>Hi <%=current_user.name %></h1>
-          <%end%>
           <%= yield %>
       </div>
     </div>

@@ -1,0 +1,83 @@
+// Place all the styles related to the questions controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.new-header{
+  text-align: center;
+}
+.all-questions{
+  .header{
+    label{
+     background-color: #dedede;
+    }
+  }
+  .question.mine{
+    background: #dedede;
+  }
+  .question{
+    padding: 10px;
+    background: #f8f8f8;
+    .question-body{
+      margin: 0px 10px;
+    }
+    .question-title {
+       font-size:24px;
+       font-weight:bold;
+       h2{
+         margin: 0px;
+       }
+       span{
+         font-weight: 500;
+       }
+    }
+
+    .question-info {
+      &:after{
+       content: " ";
+       display: block;
+       clear: both;
+       }
+       .question-create {
+         float: left;
+         color: #999999;
+       }
+       .question-url {
+         float: right;
+         a{
+            color: #1abc9c;
+         }
+         a:hover{
+           color: #000000;
+         }
+       }
+    }
+  }
+
+}
+
+.question-page {
+	.question-description {
+	   font-size: 20px;
+	}
+
+  .title {
+    color: #a29a9a;
+  }
+
+  .tags {
+    font-size: 20px;
+    line-height: 14px;
+    padding: 4px 8px 4px 8px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    margin: 0 5px 0 0;
+    display: inline-block;
+    background-color: #1abc9c;
+    color: #ffffff;
+  }
+
+}
+
+ul {
+  list-style-type: none;
+}
